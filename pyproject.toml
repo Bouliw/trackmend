@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "trackmend"
+version = "0.1.0"
+description = "Fix titles, artwork, album info, lyrics and duplicates of local tracks in the macOS Music app."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.10"
+dependencies = ["mutagen>=1.45"]
+keywords = ["apple music", "music app", "itunes", "macos", "id3", "tags", "artwork", "lyrics", "lrclib", "deezer"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Environment :: MacOS X",
+    "Intended Audience :: End Users/Desktop",
+    "Operating System :: MacOS",
+    "Programming Language :: Python :: 3",
+    "Topic :: Multimedia :: Sound/Audio",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[project.scripts]
+trackmend = "trackmend.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/Bouliw/trackmend"
+Issues = "https://github.com/Bouliw/trackmend/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+trackmend = ["osa/*.applescript", "osa/*.js"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

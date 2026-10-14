@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    name: ${{ matrix.os }} / Python ${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        python: ["3.10", "3.12", "3.14"]
+        include:
+          - os: macos-latest
+            python: "3.14"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install ffmpeg
+        run: |
+          if [ "$RUNNER_OS" = "Linux" ]; then
+            sudo apt-get update -q && sudo apt-get install -y -q ffmpeg
+          else
+            command -v ffmpeg || brew install ffmpeg
+          fi
+      - name: Install
+        run: pip install -e ".[test]"
+      - name: Tests
+        run: pytest -q
+      - name: Compile the AppleScript and JavaScript files
+        if: runner.os == 'macOS'
+        run: |
+          for f in src/trackmend/osa/*.applescript; do osacompile -o "$RUNNER_TEMP/check.scpt" "$f"; done
+          for f in src/trackmend/osa/*.js; do osacompile -l JavaScript -o "$RUNNER_TEMP/check.scpt" "$f"; done

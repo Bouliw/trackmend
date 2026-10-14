@@ -8,7 +8,7 @@ from typing import Callable, List, Optional, TextIO
 from . import __version__, dedup, lyrics, reimport, review, scan, split, tags, undo
 from .music import MusicApp, MusicError
 from .net import Http, NetError
-from .ops import Context, Library, Stop
+from .ops import Context, Library, Stop, relocate
 from .store import Busy, Home
 
 EXIT_BUSY = 75
@@ -139,6 +139,7 @@ def main(argv: Optional[List[str]] = None, music: Optional[Library] = None,
                       interactive=interactive, http_factory=http_factory)
         if args.command == "scan":
             tracks = music.tracks(args.playlist)
+            relocate(ctx, tracks)
             scan.report(ctx, tracks, details=args.details, as_json=args.json,
                         title=f" of playlist \"{args.playlist}\"" if args.playlist else "")
             return 0
@@ -148,6 +149,7 @@ def main(argv: Optional[List[str]] = None, music: Optional[Library] = None,
             if args.command == "review":
                 return review.run(ctx, args, argv)
             tracks = music.tracks(args.playlist)
+            relocate(ctx, tracks)   # files replaced or moved since Music's own records were read
             if args.command == "tags":
                 return tags.run(ctx, tracks, args, argv)
             if args.command == "lyrics":

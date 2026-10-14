@@ -6,6 +6,7 @@ import pytest
 from conftest import png_bytes
 from fakes import FakeHttp, FakeMusic
 from trackmend import audio
+from trackmend.music import Track
 from test_matching import dz_track
 
 # A JPEG header saying 1000x1000, padded to look like a real download.
@@ -185,3 +186,22 @@ def test_playlist_limits_the_scope(make_audio, run_cli, music, web):
 
 def test_unused_fakehttp_default():
     assert FakeHttp()("https://x", {})[0] == 404
+
+
+def test_file_replaced_after_the_export_is_found_by_persistent_id(make_audio, run_cli, music, web, media):
+    # Another script swaps the clip for the official version (.mp3 -> .m4a) during the run.
+    old = make_audio("clip.mp3", title="HUMBLE. (Official Video)", artist="KendrickLamarVEVO")
+    pid = music.add_file(old, duration=180.0)
+    export = [t.to_dict() for t in music.tracks()]                # taken before the swap
+    new = make_audio("official.m4a", title="HUMBLE. (Official Video)", artist="KendrickLamarVEVO")
+    music.tracks = lambda playlist=None: [Track.from_dict(d) for d in export]   # still says clip.mp3
+    music.get(pid).location = new
+    os.remove(old)
+    music._inode[pid] = (os.stat(new).st_dev, os.stat(new).st_ino)
+    web.routes.update({
+        "search?": {"data": [dz_track(1, "HUMBLE.", "Kendrick Lamar", 177, album="DAMN.", album_id=55)]},
+        "track/1": {"title": "HUMBLE."}, "album/55": {"title": "DAMN."}, "cdn/1.jpg": (200, COVER),
+    })
+    code, out = run_cli("tags", "--apply", "--no-artwork")
+    assert code == 0, out
+    assert audio.read(new).album == "DAMN." and music.get(pid).album == "DAMN."

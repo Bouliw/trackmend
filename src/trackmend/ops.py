@@ -71,6 +71,19 @@ def local_file(t: Track) -> bool:
     return bool(t.location) and audio.is_supported(t.location)
 
 
+def relocate(ctx: Context, tracks: List[Track]) -> None:
+    """Ask Music again, by persistent ID, where the files that are no longer at their
+    exported path are now (replaced by another version, moved by another script)."""
+    gone = [t for t in tracks if t.location and not os.path.exists(t.location)]
+    if not gone:
+        return
+    info = ctx.music.info([t.pid for t in gone])
+    for t in gone:
+        loc = (info.get(t.pid) or {}).get("location")
+        if loc:
+            t.location = loc
+
+
 def fresh_location(ctx: Context, pid: str) -> str:
     """Where the file is right now (Music may have moved it since the export)."""
     loc = ctx.music.location(pid)

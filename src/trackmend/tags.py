@@ -229,6 +229,9 @@ def run(ctx: Context, tracks: List[Track], args, argv: List[str]) -> int:
     try:
         for i, t in enumerate(todo, 1):
             try:
+                if not os.path.exists(t.location or ""):
+                    # replaced or moved since the export (another script swapping files, say)
+                    t.location = ctx.music.location(t.pid) or ""
                 ftags = audio.read(t.location)
                 existing = audio.cover_bytes(t.location)
                 parsed = text.parse(t.name, t.artist)

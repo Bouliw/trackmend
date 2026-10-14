@@ -222,8 +222,10 @@ A last search is made with the main artist alone and the title without brackets.
   trackmend hands the image to Music itself (`set data of artwork 1 … as JPEG picture`),
   turning PNG images into JPEG first, and does the same when it undoes a run.
 - When "Keep Music Media folder organized" is on, Music renames and moves a file right
-  after a refresh. trackmend never keeps a list of paths: it reads a track's location
-  just before each write.
+  after a refresh, and other scripts may swap a file for another version (`.mp3` for
+  `.m4a`). trackmend never keeps a list of paths: it asks Music for a track's location,
+  by persistent ID, just before each write, and again for any file that is no longer
+  where the export said.
 - Some AAC files rewritten by other tools show 0:02 for a four-minute song. `scan` finds
   them (Music's duration against the file's) and `reimport` adds them again, keeping play
   count and favorite.

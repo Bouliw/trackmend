@@ -1,3 +1,8 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/banner-dark.png">
+  <img src="docs/banner-light.png" alt="trackmend" width="100%">
+</picture>
+
 # trackmend
 
 [![CI](https://github.com/Bouliw/trackmend/actions/workflows/ci.yml/badge.svg)](https://github.com/Bouliw/trackmend/actions/workflows/ci.yml)

@@ -311,6 +311,19 @@ Code layout: `text.py` (names, comparison keys), `deezer.py`, `lrclib.py`, `musi
 backups), `music.py` and `osa/` (the Music app), `store.py` (lock, journal, progress), one
 module per command.
 
+## More tools by Bouliw
+
+- [Roughcut](https://github.com/Bouliw/fcpxml-roughcut): Turns talking-head footage into a rough cut you finish in Final Cut Pro.
+- [Vigie](https://github.com/Bouliw/vigie): Sigma detection on Windows, Linux and macOS logs, with a report mapped to MITRE ATT&CK.
+- [Earshot](https://github.com/Bouliw/earshot): Live, on-device transcription of any app on your Mac, with speaker names.
+- [doc-indexer-macos](https://github.com/Bouliw/doc-indexer-macos): On-device OCR for a folder of paperwork, ready for grep or an AI agent.
+- [Lantern](https://github.com/Bouliw/lantern): A stylish Jellyfin client for desktop, LG webOS TVs and phones.
+- [Boulito](https://github.com/Bouliw/boulito): A voice assistant that runs 100% on your Mac.
+- [Takeline](https://github.com/Bouliw/takeline): A teleprompter that follows your voice, entirely on your Mac.
+- [mac-toolkit](https://github.com/Bouliw/mac-toolkit): Small tools I use every day on my Mac.
+
+All projects: [bouliw.github.io](https://bouliw.github.io)
+
 ## License
 
 MIT. Lyrics, artwork and metadata belong to their owners; trackmend only fetches them

@@ -1,6 +1,6 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/banner-dark.png">
-  <img src="docs/banner-light.png" alt="trackmend" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Bouliw/trackmend/main/docs/banner-dark.png">
+  <img src="https://raw.githubusercontent.com/Bouliw/trackmend/main/docs/banner-light.png" alt="trackmend" width="100%">
 </picture>
 
 # trackmend
@@ -38,7 +38,7 @@ A sample library of twelve YouTube-style files (real names, silent audio), befor
 after `tags`, `lyrics` and `dedup`, run against the real Deezer, LRCLIB and iTunes
 services (and a YouTube search for the last-resort thumbnail):
 
-![scan report before and after](docs/scan-before-after.png)
+![scan report before and after](https://raw.githubusercontent.com/Bouliw/trackmend/main/docs/scan-before-after.png)
 
 What `tags --apply` did on it:
 

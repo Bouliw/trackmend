@@ -74,6 +74,12 @@ You need macOS with the Music app, and Python 3.10 or later.
 
 ```sh
 brew install pipx ffmpeg      # ffmpeg is only needed by split, reimport and artwork cropping
+pipx install trackmend
+```
+
+To install the latest code from GitHub instead:
+
+```sh
 pipx install git+https://github.com/Bouliw/trackmend.git
 ```
 

@@ -5,7 +5,7 @@
 
 # trackmend
 
-[![CI](https://github.com/Bouliw/trackmend/actions/workflows/ci.yml/badge.svg)](https://github.com/Bouliw/trackmend/actions/workflows/ci.yml)
+[![CI](https://github.com/Bouliw/trackmend/actions/workflows/ci.yml/badge.svg)](https://github.com/Bouliw/trackmend/actions/workflows/ci.yml) [![Release](https://img.shields.io/github/v/release/Bouliw/trackmend?sort=semver)](https://github.com/Bouliw/trackmend/releases/latest) [![PyPI](https://img.shields.io/pypi/v/trackmend)](https://pypi.org/project/trackmend/) [![Python](https://img.shields.io/pypi/pyversions/trackmend)](https://pypi.org/project/trackmend/) [![License](https://img.shields.io/github/license/Bouliw/trackmend)](LICENSE)
 
 trackmend repairs a macOS Music library full of local files: YouTube rips, old MP3
 collections, albums saved as one long file. It cleans the titles, finds the real
